@@ -1,0 +1,34 @@
+<!-- Jennifer Moesa, Eindopdracht, 8 mei 2021-->
+
+<!DOCTYPE html>
+
+<!--in de HTML zet je alles wat met opmaak van je HTML pagina te maken heeft. Denk aan de achtergrondkleur,
+het stylen van tekst. Ook zet je er de knopjes en tekstvakken neer -->
+<html>
+<head>
+  <!--De titel van het document-->
+<title>Welkom!</title>
+</head>
+
+<style>
+  body {
+    background-color: #E8F8F5;
+  }
+</style>
+
+<!--In de body zet je de inhoud van het document. De tekst die je op het beeldscherm ziet-->
+<body>
+<h1 style="color: #7FB3D5;"><center>Welkom bij de Online Visboer. Klik op de zalm om verder te gaan.</h1></center><br>
+<center><img id="Img" src="images/zalmfilet_vers.png" width = "450" height = "300" onclick="bestelPagina()"></center>
+</body>
+
+
+
+<script>
+  /* Met deze functie zorg je ervoor dat als je op de afbeelding klikt, het doorverwijst naar de homepagina*/
+function bestelPagina() {
+	location.href = "homepagina.html";
+}
+</script>
+
+</html>

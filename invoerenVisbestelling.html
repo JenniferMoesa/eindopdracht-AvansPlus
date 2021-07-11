@@ -1,0 +1,184 @@
+<!-- Jennifer Moesa, Eindopdracht, 8 mei 2021-->
+
+<html>
+<head>
+	<title>Bestelpagina</title>
+
+	<style>
+		body {
+		  background-color: #E8F8F5;
+		}
+	</style>
+</head>
+<!--in de HTML zet je alles wat met opmaak van je HTML pagina te maken heeft. Denk aan de achtergrondkleur,
+het stylen van tekst. Ook zet je er de knopjes en tekstvakken neer -->
+
+<h1 style="color: #7FB3D5;">Op deze pagina kunt u uw bestelling invoeren.</h1>
+
+<img id="Img" src="images/De-Online-Visboer.png" width = "250" height = "200" onclick="homepagina()">
+
+<h3 style="color: #7FB3D5;">U kunt bij ons kibbeling, dorade, verse zalmmoot, visfriet, viskoekjes, zalmsnacks en saus (ravigotte, cocktail en knoflook) bestellen.</h3>
+
+De prijs van kibbeling is €<span id = "labelKibbelingPrijs"></span>/ kilo<br>
+De prijs van dorade is €<span id = "labelDoradePrijs"></span>/ kilo<br>
+De prijs van verse zalmmoot is €<span id = "labelZalmmootPrijs"></span>/ kilo<br>
+De prijs van visfriet is €<span id = "labelVisfrietPrijs"></span>/ stuk<br>
+De prijs van viskoekjes is €<span id = "labelViskoekjePrijs"></span>/ stuk<br>
+De prijs van een zalmsnack is €<span id = "labelZalmsnackPrijs"></span>/ stuk<br>
+De prijs van een bakje saus is € <span id = "labelRavigottePrijs"></span>/ stuk<br><br>
+
+Voer het aantal gram kibbeling in dat je wilt:<input type="number" id="invoerveldAantalKibbeling" min="0" max="5000" placeholder="0.500"> <br>
+Voer het aantal gram dorade in dat je wilt: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" id="invoerveldAantalDorade" min="0" max="5000" placeholder="0.500"> <br>
+Voer het aantal gram zalmmoot in dat je wilt: <input type = "number" id="invoerveldAantalZalmmoot" min="0" max="5000" placeholder="0.500"> <br>
+Voer het aantal visfriet per stuk in dat je wilt:&nbsp;<input type="number" id="invoerveldAantalVisfriet" min="0" max="20" placeholder="1"> <br>
+Voer het aantal viskoekjes in dat je wilt: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <input type="number" id="invoerveldAantalViskoekje" min="0" max="20" placeholder="1"><br>
+Voer het aantal zalmsnacks in dat je wilt: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; <input type="number" id="invoerveldAantalZalmsnack" min="0" max="20" placeholder=""><br>
+Voer het aantal bakjes saus in dat je wilt: <input type="number" id="invoerveldAantalRavigotte" min="0" max="20" placeholder="1">
+
+<input type = "button" id = "btn1" value = "Bereken prijs" onclick = "berekening()">
+
+<hr>
+<!--Hier heb ik tekst en labels (label1, label2) aangemaakt. Omdat ik het aantal bakjes kibbeling en de totaalprijs wil laten zien
+als er op de knop wordt gedrukt moet ik JavaScript vertellen waar hij dat moet neerzetten (het berekenen gebeurt in de
+JavaScript functie berekening. label1 en label2 zijn id's waardoor JavaScript met HTML kan praten en omgekeerd-->
+Aantal kibbeling per gram: <span id = "label1"></span> <br>
+Aantal dorade per gram: <span id = "label2"></span> <br>
+Aantal verse zalmmoot per gram: <span id = "label3"></span> <br>
+Aantal visfriet per stuk: <span id = "label4"></span> <br>
+Aantal viskoekjes per stuk: <span id = "label5"></span><br>
+Aantal zalmsnacks per stuk: <span id = "label6"></span><br>
+Aantal bakjes saus: <span id = "label7"></span><br><br><br>
+
+Prijs kibbeling: <span id = "prijsKibbeling"></span><br>
+Prijs dorade: <span id = "prijsDorade"></span><br>
+Prijs verse zalmmoot: <span id = "prijsZalmmoot"></span><br>
+Prijs visfriet: <span id = "prijsVisfriet"></span><br>
+Prijs viskoekje: <span id = "prijsViskoekje"></span><br>
+Prijs zalmsnack: <span id = "prijsZalmsnack"></span><br>
+Prijs saus: <span id = "prijsRavigotte"></span><br><br>
+
+<b>Korting: </b><span id = "disc"></span><br><br>
+<hr>
+<b>Totaalprijs: </b><span id = "label8"></span><br><br>
+
+<input type = "button" id = btn2 value = "Overzicht bestelling" onclick = "bestellen()">
+
+</body>
+
+<script>
+	var artikelenArray = [
+		["Kibbeling", 11.00],
+		["Dorade", 11.43],
+		["Zalmmoot", 32.50],
+		["Visfriet", 3.50],
+		["Viskoekje", 1.75],
+		["Zalmsnack", 3.95],
+		["Ravigotte", 0.60],
+	];
+
+//De programmeur kiest er voor om de naam en de prijs van de artikel te vermelden voor de klant. Dit is dynamisch. Je hoeft bij een wijziging van de naam van een artikel of de prijs alleen de array aan te passen.
+labelKibbelingPrijs.innerHTML = (artikelenArray[0][1]).toFixed(2);
+labelDoradePrijs.innerHTML = (artikelenArray[1][1]).toFixed(2);
+labelZalmmootPrijs.innerHTML = (artikelenArray[2][1]).toFixed(2);
+labelVisfrietPrijs.innerHTML = (artikelenArray[3][1]).toFixed(2); //zie labelVisfrietPrijs in het HTML deel. Zorgt er voor dat daar de prijs van visfriet wordt weergegeven. Dan hoef je dat niet hard coded te doen. Bij een prijswijziging hoef je de prijs alleen in de array aan te passen
+labelViskoekjePrijs.innerHTML = (artikelenArray[4][1]).toFixed(2); //zie labelViskoekjesPrijs in het HTML deel. Zorgt er voor dat daar de prijs van een viskoekje wordt weergegeven. Dan hoef je dat niet hard coded te doen. Bij een prijswijziging hoef je de prijs alleen in de array aan te passen
+labelZalmsnackPrijs.innerHTML = (artikelenArray[5][1]).toFixed(2);
+labelRavigottePrijs.innerHTML = (artikelenArray[6][1]).toFixed(2);
+var disc = document.getElementById("disc");
+var label8 = document.getElementById("label8");
+
+
+function berekening() {
+	//Aanmaken van variabelen
+	var aantalKibbeling, aantalDorade, aantalZalmmoot, aantalVisfriet, aantalViskoekje, aantalZalmsnack, aantalRavigotte, subPrijsKibbeling, subPrijsDorado, subPrijsZalmmoot, subPrijsVisfriet, subPrijsViskoekje, subPrijsRavigotte, totaalPrijs;
+	var kortingVisfriet, kortingViskoekje, kortingZalmsnack, kortingRavigotte, sum, sumDiscount;
+	var aantallenArray = []; //index 0 is voor het aantal kibbeling, index 1 is voor het aantal dorade
+	
+	//Haalt het aantal ingevoerde kibbeling, dorade, zalmmoot, visfriet, viskoekjes en ravigotte op en stopt dat in een JS variabele.
+	aantalKibbeling = document.getElementById("invoerveldAantalKibbeling").value;
+	aantalDorade = document.getElementById("invoerveldAantalDorade").value;
+	aantalZalmmoot = document.getElementById("invoerveldAantalZalmmoot").value;
+	aantalVisfriet = document.getElementById("invoerveldAantalVisfriet").value; //haalt het aantal bakjes op uit het invoerveld. JavaScript weet aan de hand van het id van het invoerveld (invoerveldAantalKibbeling) dat daar het aantal bakjes kibbeling staat.
+	aantalViskoekje = document.getElementById("invoerveldAantalViskoekje").value; //haalt het aantal viskoekjes op uit het invoerveld. JavaScript weet aan de hand van het id van het invoerveld (invoerveldAantalViskoekjes) dat daar het aantal viskoekjes staat.
+	aantalZalmsnack = document.getElementById("invoerveldAantalZalmsnack").value;
+	aantalRavigotte = document.getElementById("invoerveldAantalRavigotte").value; //haalt het aantal ravigotte op uit het invoerveld. JavaScript weet aan de hand van het id van het invoerveld (invoerveldAantalRavigotte) dat daar het aantal ravigotte staat.
+
+	//Laat het aantal kibbeling, botervis, visfriet, viskoekjes en ravigotte zien op het scherm via HTML.
+	label1.innerHTML = aantalKibbeling; //het aantal kibbeling moet op het scherm komen. Dat hadden we label1 gegeven. Hier zet je dan de waarde van aantalKibbeling dat terug wordt gegeven aan HTML via id label1.
+	label2.innerHTML = aantalDorade;
+	label3.innerHTML = aantalZalmmoot;
+	label4.innerHTML = aantalVisfriet; 
+	label5.innerHTML = aantalViskoekje; //het aantal viskoekjes moet op het scherm komen. Dat hadden we label2 gegeven. Hier zet je dan de waarde van aantalViskoekjes dat terug wordt gegeven aan HTML via id label2.
+    label6.innerHTML = aantalZalmsnack;
+	label7.innerHTML = aantalRavigotte;
+
+	//Omdat er veel 'losse' info is die niet logisch in een array kunnen heeft de programmeur gekozen voor het gebruik van objecten.
+	aantalObject = {aantalArtikel1: aantalKibbeling, aantalArtikel2: aantalDorade, aantalArtikel3: aantalZalmmoot, aantalArtikel4: aantalVisfriet, aantalArtikel5: aantalViskoekje, aantalArtikel6: aantalZalmsnack, aantalArtikel7: aantalRavigotte};
+	console.log(aantalObject.aantalArtikel1 + " " + aantalObject.aantalArtikel2); //uitlezen van object in de console om te zien of de waarden goed worden doorgegeven.
+
+	//prijsberekening van kibbeling, botervis, visfriet, viskoekjes en ravigotte.
+	subPrijsKibbeling = (aantalKibbeling * artikelenArray[0][1]).toFixed(2);
+	subPrijsDorade = (aantalDorade * artikelenArray[1][1]).toFixed(2);
+	subPrijsZalmmoot = (aantalZalmmoot * artikelenArray[2][1]).toFixed(2);
+	subPrijsVisfriet = (aantalVisfriet * artikelenArray[3][1]).toFixed(2); //bereken de prijs van de visfriet
+	subPrijsViskoekje = (aantalViskoekje * artikelenArray[4][1]).toFixed(2); //bereken de prijs van de viskoekjes
+    subPrijsZalmsnack = (aantalZalmsnack * artikelenArray[5][1]).toFixed(2);
+	subPrijsRavigotte = (aantalRavigotte * artikelenArray[6][1]).toFixed(2); //bereken de prijs van de ravigotte
+	
+	//zet de subtotaalprijzen van regel 92-97 in een object.
+	subtotaalObject = {subtotaalArtikel1: subPrijsKibbeling, subtotaalArtikel2: subPrijsDorade, subtotaalArtikel3: subPrijsZalmmoot,subtotaalArtikel4: subPrijsVisfriet, subtotaalArtikel5: subPrijsViskoekje, subtotaalArtikel6: subPrijsZalmsnack, subtotaalArtikel7: subPrijsRavigotte,};
+	console.log(subtotaalObject.subtotaalArtikel1 + " " + subtotaalObject.subtotaalArtikel2); //testen in de console of het object de juiste waarden bevat.
+
+	//laat de subtotaalprijzen op het scherm zien via HTML.
+	prijsKibbeling.innerHTML = subPrijsKibbeling;
+	prijsDorade.innerHTML = subPrijsDorade;
+	prijsZalmmoot.innerHTML = subPrijsZalmmoot;
+	prijsVisfriet.innerHTML = subPrijsVisfriet;
+	prijsViskoekje.innerHTML = subPrijsViskoekje;
+	prijsZalmsnack.innerHTML = subPrijsZalmsnack;	
+    prijsRavigotte.innerHTML = subPrijsRavigotte;	
+	
+	//Als de klant 3 artikelen of meer van hetzelfde product bestelt, krijgt de klant per artikel € 0,09 cent korting. 
+	kortingVisfriet = (aantalObject.aantalArtikel4/3 - (aantalObject.aantalArtikel4/3)%1); //aantal visfriet gedeeld door 3 - aantal  visfriet gedeeld door 3 modulo 0 geeft de restwaarde aan. Bijvoorbeeld 2 visfriet: 2/3 - 2/3%1 = 0.666 - 0.666 = 0 dus geen korting. Bijvoorbeeld 4 visfriet: 4/3 - 4/3%1 = 1.333 - 0.333 = 1. Dat betekent dat er 1x een geval bij visfriet is dat je 3 visfriet hebt.
+	kortingViskoekje = (aantalObject.aantalArtikel5/3 - (aantalObject.aantalArtikel5/3)%1); 
+	kortingZalmsnack = (aantalObject.aantalArtikel6/3 - (aantalObject.aantalArtikel6/3)%1); 
+	kortingRavigotte = (aantalObject.aantalArtikel7/3 - (aantalObject.aantalArtikel7/3)%1);
+
+	sumDiscount = (kortingVisfriet + kortingViskoekje + kortingZalmsnack + kortingRavigotte) * 3 * 0.09; //aantal keren korting per artikel bij elkaar opgeteld * eenheden van 3 * de kortingsprijs.
+	console.log("kortingsbedrag: " + sumDiscount);//testen in de console of het object de juiste waarden bevat. 
+	disc.innerHTML = sumDiscount; //laat het kortingsbedrag op het scherm zien via HTML.
+	sumDiscountObject = {korting: sumDiscount}; //maakt object aan met het kortingsbedrag.
+	
+	//telt de subtotaalprijzen van de artikelen bij elkaar op, testen in de console en zet het in een object.
+	sum = (parseFloat(subPrijsKibbeling) + parseFloat(subPrijsDorade) + parseFloat(subPrijsZalmmoot) + parseFloat(subPrijsVisfriet) + parseFloat(subPrijsViskoekje) + parseFloat(subPrijsRavigotte)).toFixed(2);
+	console.log("subtotaal: " + sum);
+	sumObject = {subtotaal: sum};
+	
+	//Berekenen van de totaalprijs, testen in de console, op het scherm laten zien via HTML en in een object stoppen.
+	totaalPrijs = (sum - sumDiscount).toFixed(2); //de prijs van elk artikel wordt uit de array gehaald. Kijk goed naar de coordinaten zodat je weet welke prijs je wilt hebben (de eerste rij heeft index 0, de eerste kolom heeft index 0)
+	console.log("totaalprijs: " + totaalPrijs);
+	label8.innerHTML = "€ " + totaalPrijs; //de totaalprijs moet op het scherm komen. Dat hadden we label7 gegeven. Hier zet je de waarde van totaalPrijs dat terug wordt gegeven aan de HTML via id label7.
+	totaalPrijsObject = {totaalprijs: totaalPrijs};
+}
+
+function bestellen() {
+		//Zet de array en object in een session om door te geven aan de volgende pagina.
+		//Een sessionStorage.setItem bestaat uit een 'key' gevolgd door de array of object.
+		//JSON stringify wordt gebruikt om de array of object als een JSON-object door te geven.
+		sessionStorage.setItem('sesArtikelenArray', JSON.stringify(artikelenArray)); 
+		sessionStorage.setItem('sesAantallen', JSON.stringify(aantalObject));
+		sessionStorage.setItem('sesSubtotaal', JSON.stringify(subtotaalObject));
+		sessionStorage.setItem('sesSum', JSON.stringify(sumObject));
+		sessionStorage.setItem('sesSumDiscount', JSON.stringify(sumDiscountObject));
+		sessionStorage.setItem('sesTotaalPrijs', JSON.stringify(totaalPrijsObject));
+		
+		//Geeft aan welke HTML pagina moet worden geopend als er op de knop wordt gedrukt.
+		location.href = "bonVisbestelling.html";
+}
+
+   /* Met deze functie zorg je ervoor dat als je op de afbeelding klikt, het doorverwijst naar de homepagina*/
+   function homepagina() {
+      location.href = "homepagina.html";
+  }
+</script>
+</html>

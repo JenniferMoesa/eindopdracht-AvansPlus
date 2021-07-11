@@ -1,0 +1,107 @@
+<html>
+<head>
+	<title>Bezorggegevens</title>
+
+	<style>
+		body {
+		  background-color: #E8F8F5;
+		}
+	</style>
+</head>
+<!--in de HTML zet je alles wat met opmaak van je HTML pagina te maken heeft. Denk aan de achtergrondkleur,
+het stylen van tekst. Ook zet je er de knopjes en tekstvakken neer -->
+
+<body style = "background-color: #E8F8F5"> <!--achtergrondkleur-->
+
+<!--Titel van de HTMLpagina met een bepaalde style-->
+<h1 style="color: #7FB3D5;">De online visboer</h1>
+
+<img id="Img" src="images/De-Online-Visboer.png" width = "250" height = "200" onclick="homepagina()">
+<br><br>
+
+<h1 style="color: #7FB3D5;">Uw bezorggegevens</h1>
+
+<form name="personalia">
+<fieldset id="bezorggegevens-form">
+    <legend style="color: #7FB3D5;">Personalia</legend>
+        <label id="firstname-label" for="firstname">Voornaam:</label><br>
+        <input type="text" id="firstName" name="firstname" placeholder="Hendrika" required></div>
+
+        <label id="lastname-label" for="lastname">Achternaam:</label>
+        <input type="text" id="lastName" name="lastname" placeholder="Ring" required></div><br>
+        
+        <label id="telephone-label" for="telephone">Telefoonnummer:</label><br>
+        <input type="telephone" id="telephone" name="telephone" placeholder="0612345678" required><br>
+
+        <label id="email-label" for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="haring@haring.nl" required></div><br><br>
+
+        <label id="postalcode-label" for="postalcode">Postcode:</label><br>
+        <input type="postal" pattern ="[0-9]{A-Z}" id="postalcode" name="postalcode" placeholder="9834 NX" required></div>
+
+        <label id="housenumber-label" for="housenumber">Huisnummer:</label>
+        <input type="number" id="housenumber" name="housenumber" placeholder="12" required></div><br><br>
+
+        <label id="address-label" for="address">Adres:</label>
+        <input type="text" id="address" name="address" placeholder="Meeuwenlaan" required></div>
+
+        <label id="residence-label" for="residence">Woonplaats:</label>
+        <input type="text" id="residence" name="residence" placeholder="Meeuwwijk" required></div>
+
+        <!--checkbox-->
+        <p>Wilt u de bestelling ophalen of in de winkel laten bezorgen?</p>
+        <label for="ophalen"><input id="ophalen" type="checkbox" name="ophalen-bezorgen" value="ophalen in de winkel">Ophalen in de winkel</label>
+        <label for="bezorgen"><input id="bezorgen" type="checkbox" name="ophalen-bezorgen" value="laten bezorgen">Laten bezorgen</label>    
+
+        <input type = "button" id = "btn1" value = "Controleer bezorggegevens" onclick = "bezorggegevens()" value="submit">
+</fieldset>
+</form>
+
+Voornaam: <span id = "label1"></span> <br>
+Achternaam: <span id = "label2"></span> <br>
+Telefoonnummer: <span id = "label3"></span> <br>
+Email: <span id = "label4"></span> <br>
+Postcode: <span id = "label5"></span><br>
+Huisnummer: <span id = "label6"></span><br>
+Adres: <span id = "label7"></span><br>
+Woonplaats: <span id = "label8"></span><br>
+Bestelling: <span id = "label9"></span><br>
+
+<br><br><br>
+<input type = "button" id = "btn1" value = "Bestelling afronden" onclick = "bestellingAfronden()"><br><br><br>
+
+</body>
+
+<script>
+  function bezorggegevens () {
+	//Aanmaken van variabelen
+  var voornaam, achternaam, telefoonnummer, email, postcode, huisnummer, adres, woonplaats, bestelling;
+  var aantallenArray = [];
+
+  voornaam = document.getElementById("firstName").value;
+	achternaam = document.getElementById("lastName").value;
+  telefoonnummer = document.getElementById("telephone").value;
+  email = document.getElementById("email").value;
+  postcode = document.getElementById("postalcode").value;
+  huisnummer = document.getElementById("housenumber").value;
+  adres = document.getElementById("address").value;
+  woonplaats = document.getElementById("residence").value;
+
+  label1.innerHTML = voornaam;
+	label2.innerHTML = achternaam;
+	label3.innerHTML = telefoonnummer;
+	label4.innerHTML = email; 
+  label5.innerHTML = postcode;
+	label6.innerHTML = huisnummer;
+	label7.innerHTML = adres;
+	label8.innerHTML = woonplaats; 
+}
+
+  /* Met deze functie zorg je ervoor dat als je op het logo klikt, het doorverwijst naar de homepagina*/
+  function homepagina() {
+	location.href = "homepagina.html";
+  }
+
+</script>
+
+</html>

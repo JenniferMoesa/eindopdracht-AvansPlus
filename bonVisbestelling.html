@@ -1,0 +1,204 @@
+<!-- Jennifer Moesa, Eindopdracht, 8 mei 2021-->
+
+<html>
+<head>
+	<title>Pakbon</title>
+
+	<style>
+		body {
+		  background-color: #E8F8F5;
+		}
+	</style>
+</head>
+<!--in de HTML zet je alles wat met opmaak van je HTML pagina te maken heeft. Denk aan de achtergrondkleur,
+het stylen van tekst. Ook zet je er de knopjes en tekstvakken neer -->
+<body style = "background-color: #E8F8F5"> <!--achtergrondkleur-->
+
+<!--Titel van de HTMLpagina met een bepaalde style-->
+<h1 style="color: #7FB3D5;">De online visboer</h1>
+
+<img id="Img" src="images/De-Online-Visboer.png" width = "250" height = "200" onclick="homepagina()">
+<br><br>
+
+<h2 style="color: #7FB3D5;">Uw winkelmandje</h2>
+
+<!--De gegevens worden in tabelvorm weergegeven voor de uitlijning. Er is in elke cel links uitgelijnd-->
+<TABLE style = "width:45%">
+	<TR>
+		<TH><TD STYLE = "text-align:left"><B><U style="color: #7FB3D5;">Artikel</U></B></TH>
+		<TH><TD STYLE = "text-align:left"><B><U style="color: #7FB3D5;">Prijs per stuk/kiloprijs</U></B></TH>
+		<TH><TD STYLE = "text-align:left"><B><U style="color: #7FB3D5;">Aantal</U></B></TH>
+		<TH><TD STYLE = "text-align:left"><B><U style="color: #7FB3D5;">Subtotaal</U></B></TH>
+	</TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelKibbeling"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsKibbeling"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalKibbeling"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalKibbeling"></span></TD>
+	</TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelDorade"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsDorade"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalDorade"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalDorade"></span></TD>
+	</TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelZalmmoot"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsZalmmoot"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalZalmmoot"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalZalmmoot"></span></TD>
+	</TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelVisfriet"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsVisfriet"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalVisfriet"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalVisfriet"></span></TD>
+	</TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelViskoekje"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsViskoekje"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalViskoekje"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalViskoekje"></span></TD>
+	<TR>
+	
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelZalmsnack"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsZalmsnack"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalZalmsnack"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalZalmsnack"></span></TD>
+	<TR>
+
+	<TR>
+		<TD><TD STYLE = "text-align:left"><span id = "artikelRavigotte"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "prijsRavigotte"></span></TD>
+		<TD><TD STYLE = "text-align:left"><span id = "aantalRavigotte"></span></TD>
+		<TD><TD STYLE = "text-align:left">€ <span id = "subtotaalRavigotte"></span></TD>
+	<TR>
+
+</TABLE><BR><BR><BR>
+
+<!--Aparte tabel voor de bedragen-->
+<TABLE style = "width: 20%">
+	<TR>
+		<TD><TD STYLE = "text-align:left">Subtotaalbedrag:</TD>
+		<TD>€ <span id = "subtotaalbedrag"></span></TD>
+	<TR>
+	<TR>
+		<TD><TD STYLE = "text-align:left">Uw voordeel:</TD>
+		<TD>€ <span id = "voordeel"></span></TD>
+	<TR>
+	<TR>
+		<TD><TD STYLE = "text-align:left">Door u te betalen:</TD>
+		<TD>€ <B><span id = "betaalprijs"></B></span></TD>
+	<TR>
+	
+</TABLE>
+<br>
+<input type = "button" id = btn1 value = "Verder naar bestellen" onclick = "verdernaarbestellen()">
+
+</body>
+
+<script>
+	var sesArtikelenArray = []; //array die we gaan gebruiken om de prijzen uit de sessie te halen
+	var sesAantallen, sesSubtotaal, sesSum, sesSumDiscount, sesTotaalPrijs; //variabelen die we gebruiken om informatie uit het object te halen 
+		
+	//artikelgegevens naam artikel en prijs per artikel uit de session halen, terugvormen naar een normale array en testen in de console
+	sesArtikelenArray = JSON.parse(sessionStorage.getItem('sesArtikelenArray'));
+	console.log(sesArtikelenArray[0][0]);
+	console.log(sesArtikelenArray[0][1]);
+
+	console.log(sesArtikelenArray[1][0]);
+	console.log(sesArtikelenArray[1][1]);
+	
+	console.log(sesArtikelenArray[2][0]);
+	console.log(sesArtikelenArray[2][1]);
+	
+	console.log(sesArtikelenArray[3][0]);
+	console.log(sesArtikelenArray[3][1]);
+
+	console.log(sesArtikelenArray[4][0]);
+	console.log(sesArtikelenArray[4][1]);
+
+	console.log(sesArtikelenArray[5][0]);
+	console.log(sesArtikelenArray[5][1]);
+
+	console.log(sesArtikelenArray[6][0]);
+	console.log(sesArtikelenArray[6][1]);
+	
+	//Object terugvormen en aantallen uit het object halen en testen in de console.
+	sesAantallen = JSON.parse(sessionStorage.getItem('sesAantallen'));
+	console.log("overzicht object: " + sesAantallen.aantalArtikel1 + " " + sesAantallen.aantalArtikel2);
+	
+	//Object terugvormen en subtotaalbedragen van elk artikel uit het object halen en testen in de console.
+	sesSubtotaal = JSON.parse(sessionStorage.getItem('sesSubtotaal'))
+	console.log("overzicht object: " + sesSubtotaal.subtotaalArtikel1 + " " + sesSubtotaal.subtotaalArtikel2);
+
+	//Object terugvormen en subtotaalbedrag uit het object halen en testen in de console.
+	sesSum = JSON.parse(sessionStorage.getItem('sesSum'))
+	console.log("overzicht object: " + sesSum.subtotaal);
+	
+	//Object terugvormen en kortingsbedrag uit het object halen en testen in de console.
+	sesSumDiscount = JSON.parse(sessionStorage.getItem('sesSumDiscount'))
+	console.log("overzicht object: " + sesSumDiscount.korting);
+
+	//Object terugvormen en totaalbedrag uit het object halen en testen in de console.
+	sesTotaalPrijs = JSON.parse(sessionStorage.getItem('sesTotaalPrijs'))
+	console.log("overzicht object: " + sesTotaalPrijs.totaalprijs);
+	
+	//waarden van de array en objecten doorgeven aan de HTML
+	artikelKibbeling.innerHTML = sesArtikelenArray[0][0];
+	prijsKibbeling.innerHTML = sesArtikelenArray[0][1].toFixed(2);
+	aantalKibbeling.innerHTML = sesAantallen.aantalArtikel1;
+	subtotaalKibbeling.innerHTML = sesSubtotaal.subtotaalArtikel1;
+
+	artikelDorade.innerHTML = sesArtikelenArray[1][0];
+	prijsDorade.innerHTML = sesArtikelenArray[1][1].toFixed(2);
+	aantalDorade.innerHTML = sesAantallen.aantalArtikel2;
+	subtotaalDorade.innerHTML = sesSubtotaal.subtotaalArtikel2;
+
+	artikelZalmmoot.innerHTML = sesArtikelenArray[2][0];
+	prijsZalmmoot.innerHTML = sesArtikelenArray[2][1].toFixed(2);
+	aantalZalmmoot.innerHTML = sesAantallen.aantalArtikel3;
+	subtotaalZalmmoot.innerHTML = sesSubtotaal.subtotaalArtikel3;
+
+	artikelVisfriet.innerHTML = sesArtikelenArray[3][0];
+	prijsVisfriet.innerHTML = sesArtikelenArray[3][1].toFixed(2);
+	aantalVisfriet.innerHTML = sesAantallen.aantalArtikel4;
+	subtotaalVisfriet.innerHTML = sesSubtotaal.subtotaalArtikel4;
+	
+	artikelViskoekje.innerHTML = sesArtikelenArray[4][0];
+	prijsViskoekje.innerHTML = sesArtikelenArray[4][1].toFixed(2);
+	aantalViskoekje.innerHTML = sesAantallen.aantalArtikel5;
+	subtotaalViskoekje.innerHTML = sesSubtotaal.subtotaalArtikel5;
+
+	artikelZalmsnack.innerHTML = sesArtikelenArray[5][0];
+	prijsZalmsnack.innerHTML = sesArtikelenArray[5][1].toFixed(2);
+	aantalZalmsnack.innerHTML = sesAantallen.aantalArtikel6;
+	subtotaalZalmsnack.innerHTML = sesSubtotaal.subtotaalArtikel6;
+
+	artikelRavigotte.innerHTML = sesArtikelenArray[6][0];
+	prijsRavigotte.innerHTML = sesArtikelenArray[6][1].toFixed(2);
+	aantalRavigotte.innerHTML = sesAantallen.aantalArtikel7;
+	subtotaalRavigotte.innerHTML = sesSubtotaal.subtotaalArtikel7;
+	
+	subtotaalbedrag.innerHTML = sesSum.subtotaal;
+	voordeel.innerHTML = sesSumDiscount.korting;
+	betaalprijs.innerHTML = sesTotaalPrijs.totaalprijs;
+
+/* Met deze functie zorg je ervoor dat als je op de logo klikt, het doorverwijst naar de homepagina*/
+function homepagina() {
+	location.href = "homepagina.html";
+}
+
+  /* Met deze functie zorg je ervoor dat als je op de afbeelding klikt, het doorverwijst naar de homepagina*/
+  function verdernaarbestellen() {
+	location.href = "bezorggegevens.html";
+}
+</script>
+</html>
